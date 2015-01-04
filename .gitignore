@@ -28,3 +28,5 @@
 
 #Ignore Spring files.
 /Spring/*.pid
+.idea/dataSources.ids
+.idea/dataSources.xml
