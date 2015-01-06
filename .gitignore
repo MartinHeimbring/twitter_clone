@@ -30,3 +30,7 @@
 /Spring/*.pid
 .idea/dataSources.ids
 .idea/dataSources.xml
+.idea/runConfigurations/Development__twitter_clone.xml
+.idea/runConfigurations/Production__twitter_clone.xml
+.idea/runConfigurations/spec__twitter_clone.xml
+.idea/runConfigurations/test__twitter_clone.xml
