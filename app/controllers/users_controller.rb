@@ -14,12 +14,13 @@ class UsersController < ApplicationController
   end
 
   def show
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      send_activation_email
+      @user.send_activation_email
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
@@ -59,13 +60,7 @@ class UsersController < ApplicationController
                                  :password_confirmation)
   end
 
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "Please log in."
-      redirect_to login_url
-    end
-  end
+
 
   def correct_user
     set_user

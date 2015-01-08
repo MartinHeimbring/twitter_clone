@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
 
+  has_many      :microposts, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save   :downcase_email
@@ -40,7 +41,7 @@ class User < ActiveRecord::Base
   end
 
   def send_activation_email
-    UserMailer.account_activation(@user).deliver
+    UserMailer.account_activation(self).deliver
   end
 
   def create_reset_digest
@@ -56,6 +57,13 @@ class User < ActiveRecord::Base
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
+
+  def feed
+    Micropost.where("user_id = ?", id) #can also be 'microposts' ONLY without the 'id' and it's gonna work
+    # it contains the 'feed_item too- so no need to create a separate partial for it'
+  end
+
+
 
 
   private
